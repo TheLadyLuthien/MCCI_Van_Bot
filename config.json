@@ -1,5 +1,18 @@
 {
-    "rahhReactingUserList": [
-        "722500279810916352"
+    "emojiAutoReplies": [
+        {
+            "targetedUsers": [
+                "692448909926072361"
+            ],
+            "emojiID": "🧐",
+            "emojiType": "UNICODE"
+        },
+        {
+            "targetedUsers": [
+                "692448909926072361"
+            ],
+            "emojiID": "1360397095022104636",
+            "emojiType": "CUSTOM"
+        }
     ]
 }

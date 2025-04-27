@@ -67,11 +67,32 @@ public class App
 
         // Add a listener which answers with "Pong!" if someone writes "!ping"
         api.addMessageCreateListener(event -> {
-            if (CONFIG.rahhReactingUserList().contains(event.getMessageAuthor().getIdAsString()))
+            String userId = event.getMessageAuthor().getIdAsString();
+            for (var ear : CONFIG.emojiAutoReplies())
             {
-                Optional<KnownCustomEmoji> emoji = api.getCustomEmojiById(1354672630686290072L);
-                event.getMessage().addReaction(emoji.get());
+                if (ear.targetedUsers().contains(userId))
+                {
+                    switch (ear.emojiType())
+                    {
+                        case CUSTOM:
+                            Optional<KnownCustomEmoji> emoji = api.getCustomEmojiById(Long.parseLong(ear.emojiID()));
+                            event.getMessage().addReaction(emoji.get());
+
+                            break;
+                        case UNICODE:
+                            event.getMessage().addReaction(ear.emojiID());
+
+                        break;
+                    }
+                }
             }
+            // if (CONFIG.rahhReactingUserList().contains(event.getMessageAuthor().getIdAsString()))
+            // {
+            // }
+            // if (CONFIG.heurrrrReactingUserList().contains(event.getMessageAuthor().getIdAsString()))
+            // {
+            // // Optional<KnownCustomEmoji> emoji = api.getCustomEmojiById(1354672630686290072L);
+            // }
         });
     }
 }
